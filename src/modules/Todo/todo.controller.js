@@ -10,8 +10,14 @@ module.exports.postTodo = async(req,res)=>{
         const data = req.body;
         const result = await db.collection("todos").insertOne(data)
 
-        res.send("Data inserted successfully")
+        res.status(200).json({
+            status:true,
+            message:"data saved successfully"
+        })
     } catch (error) {
-        
+        res.status(400).json({
+            status:false,
+            message:error.message
+        })
     }
 }
