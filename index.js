@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const { connectToServer } = require("./utilis/dbConfig");
-
 const app = express();
+const todosRouter = require('./src/modules/Todo/todo.router');
 const port = process.env.PORT || 5000;
 //middleware
 app.use(cors());
@@ -13,6 +13,12 @@ connectToServer((err)=>{
     })  
     console.log(err);
 })
+
+
+app.use('/api/v1/todos',todosRouter);
+
+
+
 app.get("/", (req, res) => {
     res.send("Hello World");
 });
